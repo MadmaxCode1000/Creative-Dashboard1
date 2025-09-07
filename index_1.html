@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Creative Dashboard - Your Complete Creative Suite</title>
+    <title>Creative Dashboard - Advanced Creative Suite</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,24 +12,48 @@
         <!-- Header -->
         <header class="app-header">
             <div class="header-content">
-                <h1 class="app-title">Creative Dashboard</h1>
+                <div class="header-brand">
+                    <h1 class="app-title">Creative Dashboard</h1>
+                    <p class="app-subtitle">Advanced Creative Suite</p>
+                </div>
+                
+                <!-- Weather & Time Info -->
+                <div class="header-info">
+                    <div class="info-widget weather">
+                        <span class="icon">🌤️</span>
+                        <div class="info-content">
+                            <div class="value">27°C</div>
+                            <div class="label">Partly Cloudy</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-widget time">
+                        <span class="icon">🕐</span>
+                        <div class="info-content">
+                            <div class="value" id="currentTime">07:27</div>
+                            <div class="label" id="currentDate">Sep 7, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Header Actions -->
                 <div class="header-actions">
-                    <button id="trashBtn" class="btn btn--outline btn--sm header-btn">
-                        🗑️ Trash <span id="trashCount" class="badge hidden">0</span>
+                    <button id="trashBtn" class="btn btn--outline btn--sm">
+                        🗑️ <span id="trashCount" class="badge">0</span>
                     </button>
                     <button id="themeToggle" class="btn btn--outline btn--sm">
-                        <span id="themeToggleText">Dark Mode</span>
+                        🌙 Theme
                     </button>
                 </div>
             </div>
         </header>
 
-        <!-- Navigation Tabs -->
+        <!-- Navigation -->
         <nav class="nav-tabs">
-            <button class="nav-tab active" data-tab="home">Home</button>
-            <button class="nav-tab" data-tab="creative">Stories & Movies</button>
-            <button class="nav-tab" data-tab="files">Files & Audio</button>
-            <button class="nav-tab" data-tab="settings">Settings</button>
+            <button class="nav-tab active" data-tab="home">🏠 Home</button>
+            <button class="nav-tab" data-tab="creative">🎬 Stories & Movies</button>
+            <button class="nav-tab" data-tab="files">📁 Files & Audio</button>
+            <button class="nav-tab" data-tab="settings">⚙️ Settings</button>
         </nav>
 
         <!-- Tab Content -->
@@ -37,123 +61,98 @@
             <!-- HOME TAB -->
             <div id="homeTab" class="tab-pane active">
                 <div class="dashboard-grid">
-                    <!-- Weather Widget -->
-                    <div class="widget weather-widget">
-                        <h3>Weather</h3>
-                        <div class="weather-info">
-                            <div class="weather-main">
-                                <span class="temperature">27°C</span>
-                                <span class="condition">Partly Cloudy</span>
-                            </div>
-                            <div class="weather-details">
-                                <span>Humidity: 70%</span>
-                                <span>Wind: 15 km/h</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Air Quality Widget -->
-                    <div class="widget air-quality-widget">
-                        <h3>Air Quality</h3>
-                        <div class="air-quality-info">
-                            <div class="aqi-main">
-                                <span class="aqi-value">58</span>
-                                <span class="aqi-status moderate">Moderate</span>
-                            </div>
-                            <div class="air-quality-details">
-                                <span>PM2.5: 14 µg/m³</span>
-                                <span>PM10: 40 µg/m³</span>
-                            </div>
-                            <div class="air-quality-advice">Air quality is acceptable for most people.</div>
-                        </div>
-                    </div>
-
-                    <!-- Enhanced Tasks Widget -->
+                    <!-- Tasks Widget -->
                     <div class="widget tasks-widget">
                         <div class="widget-header">
-                            <h3>Tasks</h3>
-                            <div class="task-controls">
-                                <select id="taskFilter" class="form-control task-filter">
-                                    <option value="all">All Categories</option>
-                                    <option value="Personal">Personal</option>
-                                    <option value="Work">Work</option>
-                                    <option value="Creative">Creative</option>
-                                    <option value="Health">Health</option>
-                                    <option value="Learning">Learning</option>
-                                    <option value="Misc">Misc</option>
-                                </select>
-                                <button id="addTaskBtn" class="btn btn--primary btn--sm">Add Task</button>
-                            </div>
+                            <h3>📋 Task Management</h3>
+                            <button id="addTaskBtn" class="btn btn--primary btn--sm">+ Add Task</button>
                         </div>
-                        <div id="tasksList" class="tasks-list"></div>
+                        
+                        <!-- Task Categories -->
+                        <div class="task-categories">
+                            <button class="category-btn active" data-category="all">All</button>
+                            <button class="category-btn" data-category="Personal">Personal</button>
+                            <button class="category-btn" data-category="Work">Work</button>
+                            <button class="category-btn" data-category="Creative">Creative</button>
+                            <button class="category-btn" data-category="Health">Health</button>
+                            <button class="category-btn" data-category="Misc">Misc</button>
+                        </div>
+                        
+                        <div id="tasksList" class="tasks-list">
+                            <!-- Tasks will be populated by JS -->
+                        </div>
                     </div>
 
                     <!-- Quick Notes Widget -->
                     <div class="widget notes-widget">
                         <div class="widget-header">
-                            <h3>Quick Notes</h3>
-                            <button id="addNoteBtn" class="btn btn--primary btn--sm">Add Note</button>
+                            <h3>📝 Quick Notes</h3>
+                            <div class="note-actions">
+                                <button id="voiceNoteBtn" class="btn btn--outline btn--sm">🎤 Voice</button>
+                                <button id="addNoteBtn" class="btn btn--primary btn--sm">+ Note</button>
+                            </div>
                         </div>
-                        <div id="notesList" class="notes-list"></div>
+                        <div id="notesList" class="notes-list">
+                            <!-- Notes will be populated by JS -->
+                        </div>
                     </div>
 
-                    <!-- Enhanced Personal Finance Widget -->
+                    <!-- Finance Widget -->
                     <div class="widget finance-widget">
                         <div class="widget-header">
-                            <h3>Personal Finance</h3>
-                            <div class="finance-controls">
-                                <select id="financeMonth" class="form-control finance-month-select">
-                                    <!-- Populated dynamically -->
-                                </select>
-                                <button id="addExpenseBtn" class="btn btn--primary btn--sm">Add Expense</button>
+                            <h3>💰 Personal Finance</h3>
+                            <select id="financeMonthSelect" class="month-selector">
+                                <option value="2025-09">September 2025</option>
+                                <option value="2025-08">August 2025</option>
+                                <option value="2025-07">July 2025</option>
+                            </select>
+                        </div>
+                        
+                        <div class="finance-summary">
+                            <div class="summary-item">
+                                <span class="label">Monthly Budget:</span>
+                                <span class="value" id="monthlyBudget">₹50,000</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Spent:</span>
+                                <span class="value" id="monthlySpent">₹32,500</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Remaining:</span>
+                                <span class="value" id="monthlyRemaining">₹17,500</span>
                             </div>
                         </div>
-                        <div class="finance-overview">
-                            <div class="budget-summary">
-                                <div class="budget-item">
-                                    <span class="label">Monthly Budget:</span>
-                                    <span class="value" id="monthlyBudget">₹50,000</span>
-                                </div>
-                                <div class="budget-item">
-                                    <span class="label">Spent This Month:</span>
-                                    <span class="value" id="spentThisMonth">₹32,500</span>
-                                </div>
-                                <div class="budget-item">
-                                    <span class="label">Remaining:</span>
-                                    <span class="value" id="remainingBudget">₹17,500</span>
-                                </div>
-                            </div>
-                            <div class="recent-expenses">
-                                <h4>Recent Expenses</h4>
-                                <div id="recentExpensesList" class="recent-expenses-list"></div>
-                            </div>
-                            <button id="manageFinanceBtn" class="btn btn--secondary">Manage Finances</button>
+
+                        <button id="addExpenseBtn" class="btn btn--primary btn--sm">+ Add Expense</button>
+                        
+                        <div id="expensesList" class="expenses-list">
+                            <!-- Expenses will be populated by JS -->
                         </div>
                     </div>
 
-                    <!-- Health & Fitness Widget -->
+                    <!-- Health Widget -->
                     <div class="widget health-widget">
                         <div class="widget-header">
-                            <h3>Health & Fitness</h3>
+                            <h3>🏃‍♂️ Health & Fitness</h3>
                             <button id="updateHealthBtn" class="btn btn--primary btn--sm">Update</button>
                         </div>
-                        <div class="health-overview">
-                            <div class="health-metric">
+                        
+                        <div class="health-metrics">
+                            <div class="metric">
                                 <span class="metric-label">Steps Today:</span>
                                 <span class="metric-value" id="dailySteps">7,500</span>
                                 <span class="metric-goal">/ 10,000</span>
                             </div>
-                            <div class="health-metric">
+                            <div class="metric">
                                 <span class="metric-label">Water:</span>
                                 <span class="metric-value" id="waterIntake">6</span>
                                 <span class="metric-goal">/ 8 glasses</span>
                             </div>
-                            <div class="health-metric">
+                            <div class="metric">
                                 <span class="metric-label">Sleep:</span>
                                 <span class="metric-value" id="sleepHours">6.5</span>
                                 <span class="metric-goal">/ 8 hours</span>
                             </div>
-                            <button id="healthStatsBtn" class="btn btn--secondary">View Stats</button>
                         </div>
                     </div>
                 </div>
@@ -161,715 +160,124 @@
 
             <!-- CREATIVE TAB -->
             <div id="creativeTab" class="tab-pane">
-                <div class="creative-dashboard">
-                    <!-- Story Ideas Section -->
-                    <div class="creative-section">
-                        <div class="section-header">
-                            <h3>Story Ideas</h3>
-                            <button id="addStoryBtn" class="btn btn--primary">Add Story</button>
+                <div class="creative-grid">
+                    <!-- Story Ideas -->
+                    <div class="widget stories-widget">
+                        <div class="widget-header">
+                            <h3>💡 Story Ideas</h3>
+                            <button id="addStoryBtn" class="btn btn--primary btn--sm">+ Add Story</button>
                         </div>
-                        <div id="storiesList" class="stories-grid"></div>
+                        <div id="storiesList" class="stories-list">
+                            <!-- Stories will be populated by JS -->
+                        </div>
                     </div>
 
-                    <!-- Scripts Section -->
-                    <div class="creative-section">
-                        <div class="section-header">
-                            <h3>Scripts</h3>
-                            <button id="addScriptBtn" class="btn btn--primary">New Script</button>
+                    <!-- Scripts -->
+                    <div class="widget scripts-widget">
+                        <div class="widget-header">
+                            <h3>📜 Scripts</h3>
+                            <button id="addScriptBtn" class="btn btn--primary btn--sm">+ New Script</button>
                         </div>
-                        <div id="scriptsList" class="scripts-list"></div>
+                        <div id="scriptsList" class="scripts-list">
+                            <!-- Scripts will be populated by JS -->
+                        </div>
                     </div>
 
-                    <!-- Characters Section -->
-                    <div class="creative-section">
-                        <div class="section-header">
-                            <h3>Characters</h3>
-                            <button id="addCharacterBtn" class="btn btn--primary">Add Character</button>
+                    <!-- Characters -->
+                    <div class="widget characters-widget">
+                        <div class="widget-header">
+                            <h3>👥 Characters</h3>
+                            <button id="addCharacterBtn" class="btn btn--primary btn--sm">+ Add Character</button>
                         </div>
-                        <div id="charactersList" class="characters-grid"></div>
+                        <div id="charactersList" class="characters-list">
+                            <!-- Characters will be populated by JS -->
+                        </div>
                     </div>
 
-                    <!-- Locations Section -->
-                    <div class="creative-section">
-                        <div class="section-header">
-                            <h3>Locations</h3>
-                            <button id="addLocationBtn" class="btn btn--primary">Add Location</button>
+                    <!-- Locations -->
+                    <div class="widget locations-widget">
+                        <div class="widget-header">
+                            <h3>📍 Locations</h3>
+                            <button id="addLocationBtn" class="btn btn--primary btn--sm">+ Add Location</button>
                         </div>
-                        <div id="locationsList" class="locations-grid"></div>
-                    </div>
-
-                    <!-- Writing Stats -->
-                    <div class="creative-section">
-                        <h3>Writing Stats</h3>
-                        <div class="writing-stats">
-                            <div class="stat-item">
-                                <span class="stat-value" id="wordsToday">320</span>
-                                <span class="stat-label">Words Today</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value" id="currentStreak">4</span>
-                                <span class="stat-label">Day Streak</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value" id="totalWords">15,600</span>
-                                <span class="stat-label">Total Words</span>
-                            </div>
+                        <div id="locationsList" class="locations-list">
+                            <!-- Locations will be populated by JS -->
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- FILES & AUDIO TAB -->
+            <!-- FILES TAB -->
             <div id="filesTab" class="tab-pane">
-                <div class="files-dashboard">
-                    <!-- File Upload Section -->
-                    <div class="files-section">
-                        <div class="section-header">
-                            <h3>File Management</h3>
-                            <div class="file-actions">
-                                <button id="uploadFileBtn" class="btn btn--primary">Upload Files</button>
-                                <select id="fileFilter" class="form-control">
-                                    <option value="all">All Files</option>
-                                    <option value="images">Images</option>
-                                    <option value="documents">Documents</option>
-                                    <option value="audio">Audio</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
+                <div class="files-grid">
+                    <!-- File Upload -->
+                    <div class="widget upload-widget">
+                        <div class="widget-header">
+                            <h3>📁 File Manager</h3>
+                            <button id="uploadFileBtn" class="btn btn--primary btn--sm">📤 Upload File</button>
                         </div>
-                        <div id="fileUploadArea" class="file-upload-area">
-                            <input type="file" id="fileInput" multiple hidden>
-                            <div class="upload-placeholder">
-                                <p>📁 Drag & drop files here or click to upload</p>
-                                <p class="upload-info">Supports images, documents, audio files</p>
-                            </div>
+                        <div class="upload-area" id="uploadArea">
+                            <p>Drag and drop files here or click upload button</p>
                         </div>
-                        <div class="storage-info">
-                            <div class="storage-bar">
-                                <div id="storageProgress" class="storage-used" style="width: 0%"></div>
-                            </div>
-                            <span id="storageText">0 MB / 50 MB used</span>
+                        <div id="filesList" class="files-list">
+                            <!-- Files will be populated by JS -->
                         </div>
-                        <div id="filesList" class="files-grid"></div>
                     </div>
 
-                    <!-- Audio Recording Section -->
-                    <div class="files-section">
-                        <div class="section-header">
-                            <h3>Audio Recordings</h3>
-                            <div class="audio-controls">
-                                <button id="recordAudioBtn" class="btn btn--primary recording-btn">
-                                    🎤 Record Audio
-                                </button>
-                                <button id="voiceToTextBtn" class="btn btn--secondary">
-                                    🔤 Voice to Text
-                                </button>
+                    <!-- Audio Recordings -->
+                    <div class="widget audio-widget">
+                        <div class="widget-header">
+                            <h3>🎤 Audio Recordings</h3>
+                            <button id="recordAudioBtn" class="btn btn--primary btn--sm">🔴 Record</button>
+                        </div>
+                        <div class="recording-controls">
+                            <div id="recordingStatus" class="recording-status hidden">
+                                <span class="recording-indicator"></span>
+                                Recording... <span id="recordingDuration">00:00</span>
                             </div>
                         </div>
-                        <div id="recordingInterface" class="recording-interface hidden">
-                            <div class="recording-status">
-                                <div class="recording-indicator"></div>
-                                <span id="recordingTime">00:00</span>
-                                <div class="recording-controls">
-                                    <button id="stopRecording" class="btn btn--outline">Stop</button>
-                                </div>
-                            </div>
+                        <div id="audioRecordingsList" class="audio-list">
+                            <!-- Audio recordings will be populated by JS -->
                         </div>
-                        <div id="transcriptionArea" class="transcription-area hidden">
-                            <h4>Voice Transcription</h4>
-                            <textarea id="transcriptionText" class="form-control" rows="4" placeholder="Transcribed text will appear here..."></textarea>
-                            <div class="transcription-actions">
-                                <button id="clearTranscription" class="btn btn--outline">Clear</button>
-                                <button id="saveTranscription" class="btn btn--primary">Save as Note</button>
-                            </div>
-                        </div>
-                        <div id="recordingsList" class="recordings-list"></div>
                     </div>
                 </div>
             </div>
 
             <!-- SETTINGS TAB -->
             <div id="settingsTab" class="tab-pane">
-                <div class="settings-container">
-                    <div class="settings-section">
-                        <h3>Appearance</h3>
-                        <div class="setting-item">
-                            <label class="form-label">Theme</label>
-                            <select id="themeSelect" class="form-control">
-                                <option value="light">Light</option>
-                                <option value="dark">Dark</option>
+                <div class="settings-grid">
+                    <div class="widget settings-widget">
+                        <h3>⚙️ Application Settings</h3>
+                        
+                        <div class="setting-group">
+                            <label for="themeSelect">Theme:</label>
+                            <select id="themeSelect">
+                                <option value="dark">Dark Mode</option>
+                                <option value="light">Light Mode</option>
                             </select>
                         </div>
-                    </div>
 
-                    <div class="settings-section">
-                        <h3>Writing Preferences</h3>
-                        <div class="setting-item">
-                            <label class="form-label">Daily Writing Goal (words)</label>
-                            <input type="number" id="writingGoal" class="form-control" value="500">
+                        <div class="setting-group">
+                            <label for="autoSave">Auto-save interval (seconds):</label>
+                            <input type="number" id="autoSave" value="30" min="10" max="300">
                         </div>
-                        <div class="setting-item">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="writingReminders"> Enable writing reminders
-                            </label>
-                        </div>
-                        <div class="setting-item">
-                            <label class="form-label">Writing Reminder Time</label>
-                            <input type="time" id="reminderTime" class="form-control" value="19:00">
-                        </div>
-                    </div>
 
-                    <div class="settings-section">
-                        <h3>Audio & Media Settings</h3>
-                        <div class="setting-item">
-                            <label class="form-label">Audio Quality</label>
-                            <select id="audioQuality" class="form-control">
-                                <option value="low">Low Quality (Smaller files)</option>
-                                <option value="medium">Medium Quality</option>
-                                <option value="high">High Quality (Larger files)</option>
-                            </select>
+                        <div class="setting-group">
+                            <label for="trashRetention">Trash retention (days):</label>
+                            <input type="number" id="trashRetention" value="30" min="1" max="365">
                         </div>
-                        <div class="setting-item">
-                            <label class="form-label">Max Recording Duration (seconds)</label>
-                            <input type="number" id="maxRecordingDuration" class="form-control" value="300" min="30" max="1800">
-                        </div>
-                        <div class="setting-item">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="autoSaveTranscriptions" checked> Auto-save transcriptions
-                            </label>
-                        </div>
-                    </div>
 
-                    <div class="settings-section">
-                        <h3>Trash Management</h3>
-                        <div class="setting-item">
-                            <label class="form-label">Auto-delete items from trash after (days)</label>
-                            <input type="number" id="trashRetentionDays" class="form-control" value="30" min="1" max="365">
-                        </div>
-                        <div class="setting-actions">
-                            <button id="emptyTrashBtn" class="btn btn--outline" style="color: var(--color-error);">Empty Trash</button>
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3>Data Management</h3>
-                        <div class="setting-actions">
-                            <button id="exportDataBtn" class="btn btn--secondary">Export Data</button>
-                            <button id="importDataBtn" class="btn btn--secondary">Import Data</button>
-                            <input type="file" id="importFile" accept=".json" style="display: none;">
-                        </div>
-                        <div class="setting-item" style="margin-top: 16px;">
-                            <button id="clearDataBtn" class="btn btn--outline" style="color: var(--color-error);">Clear All Data</button>
-                        </div>
+                        <button id="exportDataBtn" class="btn btn--primary">📤 Export Data</button>
+                        <button id="importDataBtn" class="btn btn--outline">📥 Import Data</button>
+                        <button id="clearDataBtn" class="btn btn--danger">🗑️ Clear All Data</button>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Modals -->
-    <!-- Trash Modal -->
-    <div id="trashModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-content large-modal">
-            <div class="modal-header">
-                <h3>Trash Bin</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="trash-tabs">
-                    <button class="trash-tab active" data-type="all">All Items</button>
-                    <button class="trash-tab" data-type="characters">Characters</button>
-                    <button class="trash-tab" data-type="locations">Locations</button>
-                    <button class="trash-tab" data-type="stories">Stories</button>
-                    <button class="trash-tab" data-type="scripts">Scripts</button>
-                    <button class="trash-tab" data-type="tasks">Tasks</button>
-                    <button class="trash-tab" data-type="notes">Notes</button>
-                    <button class="trash-tab" data-type="expenses">Expenses</button>
-                </div>
-                <div id="trashItems" class="trash-items"></div>
-            </div>
-            <div class="modal-footer">
-                <button id="emptyTrashConfirm" class="btn btn--outline" style="color: var(--color-error);">Empty Trash</button>
-                <button class="btn btn--outline" onclick="window.app.closeModal('trashModal')">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced Task Modal -->
-    <div id="taskModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="taskModalTitle">Add Task</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="taskForm" class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Title</label>
-                    <div class="input-with-audio">
-                        <input type="text" id="taskTitle" class="form-control" required>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('taskTitle')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Category</label>
-                    <select id="taskCategory" class="form-control">
-                        <option value="Personal">Personal</option>
-                        <option value="Work">Work</option>
-                        <option value="Health">Health</option>
-                        <option value="Creative">Creative</option>
-                        <option value="Learning">Learning</option>
-                        <option value="Misc">Misc</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Priority</label>
-                    <select id="taskPriority" class="form-control">
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Due Date</label>
-                    <input type="date" id="taskDue" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Notes</label>
-                    <div class="input-with-audio">
-                        <textarea id="taskNotes" class="form-control" rows="3"></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('taskNotes')">🎤</button>
-                    </div>
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn--outline" id="cancelTask">Cancel</button>
-                <button type="submit" form="taskForm" class="btn btn--primary" id="saveTask">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced Note Modal -->
-    <div id="noteModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="noteModalTitle">Add Note</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="noteForm" class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Content</label>
-                    <div class="input-with-audio">
-                        <textarea id="noteContent" class="form-control" rows="4" required></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('noteContent')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Category</label>
-                    <select id="noteCategory" class="form-control">
-                        <option value="general">General</option>
-                        <option value="story_idea">Story Idea</option>
-                        <option value="character">Character</option>
-                        <option value="location">Location</option>
-                    </select>
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn--outline" id="cancelNote">Cancel</button>
-                <button type="submit" form="noteForm" class="btn btn--primary" id="saveNote">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced Story Modal -->
-    <div id="storyModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-content large-modal">
-            <div class="modal-header">
-                <h3 id="storyModalTitle">Add Story</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="storyForm" class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Title</label>
-                    <div class="input-with-audio">
-                        <input type="text" id="storyTitle" class="form-control" required>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('storyTitle')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Genre</label>
-                    <input type="text" id="storyGenre" class="form-control" placeholder="e.g., Drama/Thriller">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Logline</label>
-                    <div class="input-with-audio">
-                        <textarea id="storyLogline" class="form-control" rows="2" placeholder="One sentence summary of your story"></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('storyLogline')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Status</label>
-                    <select id="storyStatus" class="form-control">
-                        <option value="Concept">Concept</option>
-                        <option value="Treatment">Treatment</option>
-                        <option value="Outline">Outline</option>
-                        <option value="Script">Script</option>
-                        <option value="Production">Production</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Notes</label>
-                    <div class="input-with-audio">
-                        <textarea id="storyNotes" class="form-control" rows="3"></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('storyNotes')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Tags (comma separated)</label>
-                    <input type="text" id="storyTags" class="form-control" placeholder="tech, thriller, modern">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Attached Files</label>
-                    <div id="storyFiles" class="attached-files"></div>
-                    <button type="button" class="btn btn--outline btn--sm" onclick="window.app.attachFilesToStory()">Attach Files</button>
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn--outline" id="cancelStory">Cancel</button>
-                <button type="submit" form="storyForm" class="btn btn--primary" id="saveStory">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced Script Editor Modal -->
-    <div id="scriptModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-content fullscreen-modal">
-            <div class="modal-header">
-                <h3 id="scriptModalTitle">Script Editor</h3>
-                <div class="script-toolbar">
-                    <button type="button" id="boldBtn" class="toolbar-btn">B</button>
-                    <button type="button" id="italicBtn" class="toolbar-btn">I</button>
-                    <button type="button" id="headerBtn" class="toolbar-btn">H</button>
-                    <button type="button" id="scriptVoiceBtn" class="toolbar-btn">🎤 Voice</button>
-                    <span class="word-count">Words: <span id="wordCount">0</span></span>
-                </div>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body script-editor-body">
-                <div class="script-sidebar">
-                    <h4>Outline</h4>
-                    <div class="input-with-audio">
-                        <textarea id="scriptOutline" class="form-control" rows="10" placeholder="Write your script outline here..."></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('scriptOutline')">🎤</button>
-                    </div>
-                    <h4>Notes</h4>
-                    <div class="input-with-audio">
-                        <textarea id="scriptNotes" class="form-control" rows="5" placeholder="Script notes..."></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('scriptNotes')">🎤</button>
-                    </div>
-                </div>
-                <div class="script-main">
-                    <div id="scriptEditor" class="script-content" contenteditable="true" placeholder="Start writing your script here...
-
-FADE IN:
-
-EXT. LOCATION - DAY
-
-Your story begins here..."></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn--outline" id="closeScript">Close</button>
-                <button type="button" class="btn btn--primary" id="saveScript">Save Script</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced Character Modal -->
-    <div id="characterModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-content large-modal">
-            <div class="modal-header">
-                <h3 id="characterModalTitle">Add Character</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="characterForm" class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <input type="text" id="characterName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Age</label>
-                    <input type="number" id="characterAge" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Occupation</label>
-                    <input type="text" id="characterOccupation" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <div class="input-with-audio">
-                        <textarea id="characterDescription" class="form-control" rows="2" placeholder="One-line character description"></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('characterDescription')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Backstory</label>
-                    <div class="input-with-audio">
-                        <textarea id="characterBackstory" class="form-control" rows="3"></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('characterBackstory')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Personality Traits</label>
-                    <input type="text" id="characterTraits" class="form-control" placeholder="Comma separated traits">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Dialogue Style</label>
-                    <input type="text" id="characterDialogue" class="form-control" placeholder="How does this character speak?">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Character Arc</label>
-                    <div class="input-with-audio">
-                        <textarea id="characterArc" class="form-control" rows="2" placeholder="Character's journey through the story"></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('characterArc')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Connected Stories</label>
-                    <select id="characterStories" class="form-control" multiple>
-                        <!-- Populated dynamically -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Notes</label>
-                    <div class="input-with-audio">
-                        <textarea id="characterNotes" class="form-control" rows="3"></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('characterNotes')">🎤</button>
-                    </div>
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn--outline" id="cancelCharacter">Cancel</button>
-                <button type="submit" form="characterForm" class="btn btn--primary" id="saveCharacter">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced Location Modal -->
-    <div id="locationModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-content large-modal">
-            <div class="modal-header">
-                <h3 id="locationModalTitle">Add Location</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="locationForm" class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <input type="text" id="locationName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Type</label>
-                    <select id="locationType" class="form-control">
-                        <option value="Interior">Interior</option>
-                        <option value="Exterior">Exterior</option>
-                        <option value="Both">Both</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <div class="input-with-audio">
-                        <textarea id="locationDescription" class="form-control" rows="3" placeholder="Describe the location"></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('locationDescription')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Atmosphere</label>
-                    <div class="input-with-audio">
-                        <textarea id="locationAtmosphere" class="form-control" rows="2" placeholder="Mood and feel of the location"></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('locationAtmosphere')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Address</label>
-                    <input type="text" id="locationAddress" class="form-control" placeholder="Physical address">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Availability</label>
-                    <input type="text" id="locationAvailability" class="form-control" placeholder="When is this location available?">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Cost</label>
-                    <input type="text" id="locationCost" class="form-control" placeholder="Cost per day">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Contact Info</label>
-                    <input type="text" id="locationContact" class="form-control" placeholder="Email or phone">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Practical Considerations</label>
-                    <div class="input-with-audio">
-                        <textarea id="locationPractical" class="form-control" rows="2" placeholder="Power, parking, permits, etc."></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('locationPractical')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Connected Stories</label>
-                    <select id="locationStories" class="form-control" multiple>
-                        <!-- Populated dynamically -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Notes</label>
-                    <div class="input-with-audio">
-                        <textarea id="locationNotes" class="form-control" rows="3"></textarea>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('locationNotes')">🎤</button>
-                    </div>
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn--outline" id="cancelLocation">Cancel</button>
-                <button type="submit" form="locationForm" class="btn btn--primary" id="saveLocation">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced Finance Modal -->
-    <div id="financeModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-content large-modal">
-            <div class="modal-header">
-                <div class="finance-header">
-                    <h3>Financial Management</h3>
-                    <select id="financeModalMonth" class="form-control finance-month-select">
-                        <!-- Populated dynamically -->
-                    </select>
-                </div>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="finance-tabs">
-                    <button class="finance-tab active" data-tab="overview">Overview</button>
-                    <button class="finance-tab" data-tab="transactions">Transactions</button>
-                    <button class="finance-tab" data-tab="savings">Savings</button>
-                </div>
-                <div class="finance-content">
-                    <div id="financeOverview" class="finance-pane active">
-                        <div id="categoriesBreakdown" class="categories-grid"></div>
-                    </div>
-                    <div id="financeTransactions" class="finance-pane">
-                        <div class="transactions-header">
-                            <h4>Transactions</h4>
-                            <button id="addTransactionBtn" class="btn btn--primary btn--sm">Add Transaction</button>
-                        </div>
-                        <div id="transactionsList" class="transactions-list"></div>
-                    </div>
-                    <div id="financeSavings" class="finance-pane">
-                        <div class="savings-calculator">
-                            <h4>Savings Calculator</h4>
-                            <div id="savingsAnalysis" class="savings-analysis"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn--outline" id="closeFinance">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Health Modal -->
-    <div id="healthModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Update Health Metrics</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="healthForm" class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Steps Today</label>
-                    <input type="number" id="healthSteps" class="form-control" min="0">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Water Intake (glasses)</label>
-                    <input type="number" id="healthWater" class="form-control" min="0" max="20">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Sleep Hours</label>
-                    <input type="number" id="healthSleep" class="form-control" min="0" max="24" step="0.5">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Weight (kg)</label>
-                    <input type="number" id="healthWeight" class="form-control" min="20" max="200" step="0.1">
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn--outline" id="cancelHealth">Cancel</button>
-                <button type="submit" form="healthForm" class="btn btn--primary" id="saveHealth">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced Expense Modal -->
-    <div id="expenseModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="expenseModalTitle">Add Expense</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="expenseForm" class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <div class="input-with-audio">
-                        <input type="text" id="expenseDescription" class="form-control" required>
-                        <button type="button" class="btn btn--outline btn--sm audio-btn" onclick="window.app.startVoiceInput('expenseDescription')">🎤</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Amount</label>
-                    <input type="number" id="expenseAmount" class="form-control" min="0" step="0.01" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Category</label>
-                    <select id="expenseCategory" class="form-control" required>
-                        <option value="">Select Category</option>
-                        <option value="Food & Dining">Food & Dining</option>
-                        <option value="Transportation">Transportation</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="Health">Health</option>
-                        <option value="Creative Equipment">Creative Equipment</option>
-                        <option value="Utilities">Utilities</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Date</label>
-                    <input type="date" id="expenseDate" class="form-control" required>
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn--outline" id="cancelExpense">Cancel</button>
-                <button type="submit" form="expenseForm" class="btn btn--primary" id="saveExpense">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Auto-save indicator -->
-    <div id="autoSaveIndicator" class="auto-save-indicator hidden">
-        <span>Saved</span>
-    </div>
-
-    <!-- Voice Recognition Status -->
-    <div id="voiceStatus" class="voice-status hidden">
-        <div class="voice-indicator"></div>
-        <span>Listening...</span>
-    </div>
+    <!-- Modals will be created dynamically by JavaScript -->
+    <div id="modalContainer"></div>
 
     <script src="app.js"></script>
 </body>
